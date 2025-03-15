@@ -23,7 +23,7 @@ export default function ShareModal({
         alignItems: "center",
       }}
     >
-      <div style={{ backgroundColor: "white", padding: 20, borderRadius: 10 }}>
+      <div style={{ backgroundColor: "gray", padding: 20, borderRadius: 10 }}>
         <h2>Challenge a Friend</h2>
         <img
           src={imageUrl}

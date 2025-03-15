@@ -63,12 +63,12 @@ export default function Game({
             value={guess}
             onChange={(e) => setGuess(e.target.value)}
           />
-          <button onClick={handleGuess}>Submit</button>
-          {isComplete ? <button onClick={reset}>Next</button> : null}
           {feedback && <p>{feedback}</p>}
           {additionalInfo && <p>{additionalInfo}</p>}
         </div>
       )}
+      <button onClick={handleGuess}>Submit</button>
+      {isComplete ? <button onClick={reset}>Next</button> : null}
       <button onClick={() => setShowShareModal(true)}>Share</button>
       {showShareModal && (
         <ShareModal userId={user.id} onClose={() => setShowShareModal(false)} />

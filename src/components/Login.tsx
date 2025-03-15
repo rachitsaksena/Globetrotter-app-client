@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserProfile, login, register } from "../api";
 import type { User } from "../types";
@@ -8,6 +8,17 @@ export default function Login({ setUser }: { setUser: (user: User) => void }) {
   const [password, setPassword] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      getUserProfile()
+        .then((data) => setUser(data))
+        .then(() => {
+          navigate("/game");
+        });
+    }
+  }, [navigate, setUser]);
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -31,7 +42,10 @@ export default function Login({ setUser }: { setUser: (user: User) => void }) {
   return (
     <div>
       <h1>{isRegistering ? "Register" : "Login"}</h1>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", flexDirection: "column", gap: 16 }}
+      >
         <input
           type="text"
           placeholder="Username"
@@ -46,7 +60,10 @@ export default function Login({ setUser }: { setUser: (user: User) => void }) {
         />
         <button type="submit">{isRegistering ? "Register" : "Login"}</button>
       </form>
-      <button onClick={() => setIsRegistering(!isRegistering)}>
+      <button
+        onClick={() => setIsRegistering(!isRegistering)}
+        style={{ marginTop: 16 }}
+      >
         {isRegistering
           ? "Already have an account? Login"
           : "Need an account? Register"}

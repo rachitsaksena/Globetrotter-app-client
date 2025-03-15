@@ -11,6 +11,7 @@ import Game from "./components/Game";
 import ChallengeModal from "./components/ChallengeModal";
 import { getUserProfile } from "./api";
 import type { User } from "./types";
+import "./App.css";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
